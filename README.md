@@ -1,1 +1,1 @@
-## Welcome to bluSensor API
+## bluSensor® Bluetooth Low Energy API
