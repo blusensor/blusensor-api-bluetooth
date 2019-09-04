@@ -148,7 +148,53 @@ Please find official specification here: [Bluetooth - Battery Service](https://w
  a8a82630-10a4-11e3-ab8c-f23c91aec05e
 ```
 
+All bluSensor® devices implement the following characteristics. The logger functionality needs some configurations to be opertional. See details below.
+
+#### Sensor Data
+
+#### LED
+
+#### MAC Address
+
+#### Logger Time Reference
+
+#### Logger Interval
+
+#### Logger On/Off
+
+#### Logger Control
+
+#### Logger Data
+
+#### Logger Flash Size
+
+#### Logger Usage
+
+# Development Tools
+
+There are many tools available for iOS and Android that you can use for testing and development.
+
+Here are some of the tools available:
+* BLExplr (iOS)
+* LightBlue Explorer (iOS and Android)
+* nRF Connect (iOS and Android)
+* Blue Gecko (iOS and Android)
 
 
+# Purchase Sensors
+
+You can buy sensors and development kits in our online shop at https://www.blusensor.com/shop/
+
+# Support
+
+Having trouble with bluSensor® API or need development support? 
+
+You will get direct support from our **core development team** (free of charge)!
+
+You can contact us anytime at support@blusensor.com
+
+You need a sensor type that is not listed yet?
+
+Just drop us an email!
 
 
