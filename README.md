@@ -128,88 +128,112 @@ All bluSensor® devices implement the following characteristics. The logger func
 
 #### Sensor Data
 ```
-CHARACTERISTIC: a8a82631-10a4-11e3-ab8c-f23c91aec05e
-PROPERTIES: read/notify
-LENGTH: 4 bytes
-FORMAT: measurement (see previous chapter for format)
+a8a82631-10a4-11e3-ab8c-f23c91aec05e
 ```
 
+* PROPERTIES: read/notify
+* LENGTH: 4 bytes
+* FORMAT: measurement (see how to convert sensor data section below)
+ 
 #### LED
 ```
-CHARACTERISTIC: a8a82645-10a4-11e3-ab8c-f23c91aec05e
-PROPERTIES: write LENGTH: 1 byte FORMAT: 0x01 for blink
+a8a82645-10a4-11e3-ab8c-f23c91aec05e
 ```
+* PROPERTIES: write
+* LENGTH: 1 byte 
+* FORMAT: 0x01 for blink
 
 #### MAC Address
 ```
-CHARACTERISTIC: a8a82643-10a4-11e3-ab8c-f23c91aec05e
-PROPERTIES: read
-LENGTH: 6 bytes
-FORMAT: Mac Address Bytes XX:XX:XX:XX:XX:XX
+a8a82643-10a4-11e3-ab8c-f23c91aec05e
 ```
+* PROPERTIES: read
+* LENGTH: 6 bytes
+* FORMAT: Mac Address Bytes XX:XX:XX:XX:XX:XX
+
+#### Logger
+
+The logger of bluSensor needs some configurations to be operational. The configuration steps are.
+
+**Enable Logging**
+1. set time reference from your smartphone
+2. configure logger interval
+3. enable logging
+
+**Download Log**
+1. listen to notifications on sensor data characteristic on your smartphone
+2. start sending log data by using logger control characteristic
+3. store ordered measurements on your smartphone (4-byte chunks)
+
+**Build Log Timestamps**
+1. calculate timestamp for each measurement using time reference
+2. 1st measurement = time reference
+3. 2nd measurement = time reference + logger interval
+4. 3rd measurement = time reference + logger interval * 2
+5. and so on...
 
 #### Logger Time Reference
 ```
-CHARACTERISTIC: a8a82636-10a4-11e3-ab8c-f23c91aec05e
-PROPERTIES: read/write
-LENGTH: 4 bytes
-FORMAT: any reference timestamp that your app can handle. You need this timestamp later on to calculate the timestamps of each individual measurement.
+a8a82636-10a4-11e3-ab8c-f23c91aec05e
 ```
+* PROPERTIES: read/write
+* LENGTH: 4 bytes
+* FORMAT: any reference timestamp that your app can handle. You need this timestamp later on to calculate the timestamps of each individual measurement.
 
 #### Logger Interval
 ```
 a8a82634-10a4-11e3-ab8c-f23c91aec05e
-PROPERTIES: read/write
-LENGTH: 2 bytes
-FORMAT: interval in seconds. It is mandatory to use a logger interval of 5min/10min/15min/30min. You CANNOT use any other interval!
 ```
+* PROPERTIES: read/write
+* LENGTH: 2 bytes
+* FORMAT: interval in seconds. It is mandatory to use a logger interval of 5min/10min/15min/30min. You CANNOT use any other interval!
 
 #### Logger On/Off
 ```
 CHARACTERISTIC: a8a82633-10a4-11e3-ab8c-f23c91aec05e
-PROPERTIES: read/write
-LENGTH: 1 byte
-FORMAT: 0=OFF 1=ON
 ```
+* PROPERTIES: read/write
+* LENGTH: 1 byte
+* FORMAT: 0=OFF 1=ON
 
 #### Logger Control
 ```
-CHARACTERISTIC: a8a82635-10a4-11e3-ab8c-f23c91aec05e
-PROPERTIES: write
-LENGTH: 1 byte
-FORMAT:
-1=SEND (sends log via Logger Data Characteristic) 2=RESET (delete data and stop logger)
-3=REBOOT (reboot device and stop logger)
+a8a82635-10a4-11e3-ab8c-f23c91aec05e
 ```
+* PROPERTIES: write
+* LENGTH: 1 byte
+* FORMAT:
+  * 1=SEND (sends log via Logger Data Characteristic) 
+  * 2=RESET (delete data and stop logger)
+  * 3=REBOOT (reboot device and stop logger)
 
 #### Logger Data
 ```
-CHARACTERISTIC: a8a82637-10a4-11e3-ab8c-f23c91aec05e
-PROPERTIES: notify
-LENGTH: 16 bytes
-FORMAT: 4 measurements each 4bytes long are sent (see previous chapter for format)
+a8a82637-10a4-11e3-ab8c-f23c91aec05e
 ```
+* PROPERTIES: notify
+* LENGTH: 16 bytes
+* FORMAT: 4 measurements each 4bytes long are sent (see previous chapter for format)
 
 #### Logger Flash Size
 ```
-CHARACTERISTIC: a8a82950-10a4-11e3-ab8c-f23c91aec05e
-PROPERTIES: read
-LENGTH: 4 bytes
-FORMAT: size of flash memory in bytes
+a8a82950-10a4-11e3-ab8c-f23c91aec05e
 ```
+* PROPERTIES: read
+* LENGTH: 4 bytes
+* FORMAT: size of flash memory in bytes
 
 #### Logger Usage
 ```
-CHARACTERISTIC: a8a82646-10a4-11e3-ab8c-f23c91aec05e
-PROPERTIES: read
-LENGTH: 4 bytes
-FORMAT: size of used flash memory in bytes
+a8a82646-10a4-11e3-ab8c-f23c91aec05e
 ```
+* PROPERTIES: read
+* LENGTH: 4 bytes
+* FORMAT: size of used flash memory in bytes
+
 # Converting Sensor Data
 
-#### Converting Sensor Data
-
-##### Humidity & Temperature 
+#### Humidity & Temperature 
 
 The sensor data is 4 bytes and can be converted using the following mechanism and formular.
 
@@ -230,26 +254,46 @@ Example:
 ```
 
 
-#### Accelerometer           
+#### Accelerometer       
+coming soon...
 #### 3D Fusion (Euler)       
-#### Air Flow                
+coming soon...
+#### Air Flow 
+coming soon...
 #### Ambient Light           
+coming soon...
 #### Accelerometer, Magnetometer, Gyroscope 
+coming soon...
 #### Accelerometer (Low Energy)  
+coming soon...
 #### ShakeIt Sports Tracker 
+coming soon...
 #### Air Quality (Industrial)
+coming soon...
 #### Air Quality 
+coming soon...
 #### Usage Counter  
+coming soon...
 #### Temperature Probe (PTC) 
+coming soon...
 #### Temperature Probe (NTC) 
+coming soon...
 #### Infrared Array Camera  
+coming soon...
 #### Particulate Matter 
+coming soon...
 #### Distance 
+coming soon...
 #### Ambient Light  
+coming soon...
 #### Highspeed Magnetometer  
+coming soon...
 #### People Presence Detector  
+coming soon...
 #### People Counter
+coming soon...
 #### Distance Counter
+coming soon...
 
 
 # Development Tools
