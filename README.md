@@ -102,31 +102,7 @@ alarm code   | description
 
 
 
-#### Advertisement Sensor Data
 
-##### Humidity & Temperature 
-
-The sensor data is 4 bytes and can be converted using the following mechanism and formular.
-
-```c++
-int hum = (data[2] & 0xff) | ((data[3] << 8) & 0xff00); 
-float relHum = -6.0f + 125.0f * (float) hum / (float) 65536;
-```
-
-
-```c++
-int temp = (data[0] & 0xff) | ((data[1] << 8) & 0xff00);
-float tempC = -46.85f + 175.72f * (float) temp / (float) 65536;
-```
-
-Example:
-```
-0100ac667a63 => 42.5% and 23.5°C
-```
-
-#### Other Sensors
-
-Will be added soon...
 
 # Services
 
@@ -151,24 +127,130 @@ Please find official specification here: [Bluetooth - Battery Service](https://w
 All bluSensor® devices implement the following characteristics. The logger functionality needs some configurations to be opertional. See details below.
 
 #### Sensor Data
+```
+CHARACTERISTIC: a8a82631-10a4-11e3-ab8c-f23c91aec05e
+PROPERTIES: read/notify
+LENGTH: 4 bytes
+FORMAT: measurement (see previous chapter for format)
+```
 
 #### LED
+```
+CHARACTERISTIC: a8a82645-10a4-11e3-ab8c-f23c91aec05e
+PROPERTIES: write LENGTH: 1 byte FORMAT: 0x01 for blink
+```
 
 #### MAC Address
+```
+CHARACTERISTIC: a8a82643-10a4-11e3-ab8c-f23c91aec05e
+PROPERTIES: read
+LENGTH: 6 bytes
+FORMAT: Mac Address Bytes XX:XX:XX:XX:XX:XX
+```
 
 #### Logger Time Reference
+```
+CHARACTERISTIC: a8a82636-10a4-11e3-ab8c-f23c91aec05e
+PROPERTIES: read/write
+LENGTH: 4 bytes
+FORMAT: any reference timestamp that your app can handle. You need this timestamp later on to calculate the timestamps of each individual measurement.
+```
 
 #### Logger Interval
+```
+a8a82634-10a4-11e3-ab8c-f23c91aec05e
+PROPERTIES: read/write
+LENGTH: 2 bytes
+FORMAT: interval in seconds. It is mandatory to use a logger interval of 5min/10min/15min/30min. You CANNOT use any other interval!
+```
 
 #### Logger On/Off
+```
+CHARACTERISTIC: a8a82633-10a4-11e3-ab8c-f23c91aec05e
+PROPERTIES: read/write
+LENGTH: 1 byte
+FORMAT: 0=OFF 1=ON
+```
 
 #### Logger Control
+```
+CHARACTERISTIC: a8a82635-10a4-11e3-ab8c-f23c91aec05e
+PROPERTIES: write
+LENGTH: 1 byte
+FORMAT:
+1=SEND (sends log via Logger Data Characteristic) 2=RESET (delete data and stop logger)
+3=REBOOT (reboot device and stop logger)
+```
 
 #### Logger Data
+```
+CHARACTERISTIC: a8a82637-10a4-11e3-ab8c-f23c91aec05e
+PROPERTIES: notify
+LENGTH: 16 bytes
+FORMAT: 4 measurements each 4bytes long are sent (see previous chapter for format)
+```
 
 #### Logger Flash Size
+```
+CHARACTERISTIC: a8a82950-10a4-11e3-ab8c-f23c91aec05e
+PROPERTIES: read
+LENGTH: 4 bytes
+FORMAT: size of flash memory in bytes
+```
 
 #### Logger Usage
+```
+CHARACTERISTIC: a8a82646-10a4-11e3-ab8c-f23c91aec05e
+PROPERTIES: read
+LENGTH: 4 bytes
+FORMAT: size of used flash memory in bytes
+```
+# Converting Sensor Data
+
+#### Converting Sensor Data
+
+##### Humidity & Temperature 
+
+The sensor data is 4 bytes and can be converted using the following mechanism and formular.
+
+```c++
+int hum = (data[2] & 0xff) | ((data[3] << 8) & 0xff00); 
+float relHum = -6.0f + 125.0f * (float) hum / (float) 65536;
+```
+
+
+```c++
+int temp = (data[0] & 0xff) | ((data[1] << 8) & 0xff00);
+float tempC = -46.85f + 175.72f * (float) temp / (float) 65536;
+```
+
+Example:
+```
+0100ac667a63 => 42.5% and 23.5°C
+```
+
+
+#### Accelerometer           
+#### 3D Fusion (Euler)       
+#### Air Flow                
+#### Ambient Light           
+#### Accelerometer, Magnetometer, Gyroscope 
+#### Accelerometer (Low Energy)  
+#### ShakeIt Sports Tracker 
+#### Air Quality (Industrial)
+#### Air Quality 
+#### Usage Counter  
+#### Temperature Probe (PTC) 
+#### Temperature Probe (NTC) 
+#### Infrared Array Camera  
+#### Particulate Matter 
+#### Distance 
+#### Ambient Light  
+#### Highspeed Magnetometer  
+#### People Presence Detector  
+#### People Counter
+#### Distance Counter
+
 
 # Development Tools
 
