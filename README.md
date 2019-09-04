@@ -58,7 +58,9 @@ company ID   | company ID    | device type  | sensor type  | alarm code   | sens
 
 device type  | description            
 ------------ | ------------- 
-
+01           | Bluetooth Low Energy (BLE)
+02           | WiFi and BLE (IoT Sensor)
+03           | WiFi and BLE (MQTT Sensor)
 
 
 #### Sensor Types
@@ -88,6 +90,40 @@ sensor type  | description
 21           | Distance Counter
 
 #### Alarm Codes
+
+bluSensor® devices
+
+alarm code   | description
+------------ | ------------- 
+00           | no alarm
+01           | alarm active
+
+
+
+### Sensor Data
+
+#### Humidity & Temperature 
+
+The sensor data is 4 bytes and can be converted using the following mechanism and formular.
+
+```c++
+int hum = (data[2] & 0xff) | ((data[3] << 8) & 0xff00); 
+float relHum = -6.0f + 125.0f * (float) hum / (float) 65536;
+```
+
+
+```c++
+int temp = (data[0] & 0xff) | ((data[1] << 8) & 0xff00);
+float tempC = -46.85f + 175.72f * (float) temp / (float) 65536;
+```
+
+Example:
+```
+0100ac667a63 => 42.5% and 23.5°C
+```
+
+
+
 
 
 
