@@ -2,13 +2,17 @@
 
 ## Introduction
 
-You can use any Bluetooth Low Energy API to access sensor data, download logged data, configure alarms, and much more on our bluSensor® devices. For more information we refer to the platform’s API documents.
+You can use any Bluetooth Low Energy API to access sensor data, download logged data, configure alarms, and much more on our bluSensor® devices. 
+
+For more information how to use Bluetooth Low Energy on your platform we refer to the platform’s API documents.
 
 ### Bluetooth Low Energy SDKs
 * iOS: https://developer.apple.com/bluetooth/
 * Android: https://developer.android.com/guide/topics/connectivity/bluetooth-le 
 * Xamarin: https://developer.xamarin.com/api/namespace/Android.Bluetooth.LE/ 
 * Xamarin: https://developer.xamarin.com/api/namespace/CoreBluetooth/
+* Web: https://github.com/WebBluetoothCG/web-bluetooth/blob/gh-pages/implementation-status.md
+
 
 ### Official Bluetooth SIG ID
 ```
