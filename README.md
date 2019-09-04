@@ -155,17 +155,17 @@ a8a82643-10a4-11e3-ab8c-f23c91aec05e
 
 The logger of bluSensor needs some configurations to be operational. The configuration steps are.
 
-**Enable Logging**
+Enable Logging
 1. set time reference from your smartphone
 2. configure logger interval
 3. enable logging
 
-**Download Log**
+Download Log
 1. listen to notifications on sensor data characteristic on your smartphone
 2. start sending log data by using logger control characteristic
 3. store ordered measurements on your smartphone (4-byte chunks)
 
-**Build Log Timestamps**
+Build Log Timestamps
 1. calculate timestamp for each measurement using time reference
 2. 1st measurement = time reference
 3. 2nd measurement = time reference + logger interval
