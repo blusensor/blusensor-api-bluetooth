@@ -18,8 +18,10 @@ For more information how to use Bluetooth Low Energy on your platform we refer t
 ```
 Almendo Technologies GmbH (0x06E8)
 ```
-Reference: https://www.bluetooth.com/specifications/assigned-numbers/company-identifiers/
+Please find our official ID here: [Bluetooth - Company ID](https://www.bluetooth.com/specifications/assigned-numbers/company-identifiers/)
 
+
+# Advertisements
 
 ### Service UUIDs
 
@@ -89,7 +91,7 @@ sensor type  | description
 20           | People Counter
 21           | Distance Counter
 
-#### Alarm Codes
+#### Advertisement Alarm Codes
 
 bluSensor® devices
 
@@ -100,9 +102,9 @@ alarm code   | description
 
 
 
-### Sensor Data
+#### Advertisement Sensor Data
 
-#### Humidity & Temperature 
+##### Humidity & Temperature 
 
 The sensor data is 4 bytes and can be converted using the following mechanism and formular.
 
@@ -122,8 +124,29 @@ Example:
 0100ac667a63 => 42.5% and 23.5°C
 ```
 
+#### Other Sensors
 
+Will be added soon...
 
+# Services
+
+## Device Information Service
+```
+180a
+```
+
+Please find official specification here: [Bluetooth - Device Information Service](https://www.bluetooth.com/specifications/gatt/viewer?attributeXmlFile=org.bluetooth.service.device_information.xml)
+
+## Battery Service
+```
+180f
+```
+Please find official specification here: [Bluetooth - Battery Service](https://www.bluetooth.com/specifications/gatt/viewer?attributeXmlFile=org.bluetooth.service.battery_service.xml)
+
+## bluSensor® Service
+```
+ a8a82630-10a4-11e3-ab8c-f23c91aec05e
+```
 
 
 
