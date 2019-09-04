@@ -174,6 +174,8 @@ All bluSensor® devices implement the following characteristics. The logger func
 
 There are many tools available for iOS and Android that you can use for testing and development.
 
+<img src="ble_screenshot.jpg" width="400">
+
 Here are some of the tools available:
 * BLExplr (iOS)
 * LightBlue Explorer (iOS and Android)
