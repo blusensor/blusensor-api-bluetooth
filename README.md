@@ -4,6 +4,9 @@
 
 You can use any Bluetooth Low Energy API to access sensor data, download logged data, configure alarms, and much more on our bluSensor® devices. 
 
+
+<img src="screenshot_studio.png" width="800">
+
 For more information how to use Bluetooth Low Energy on your platform we refer to the platform’s API documents.
 
 ### Bluetooth Low Energy SDKs
@@ -253,47 +256,27 @@ Example:
 0100ac667a63 => 42.5% and 23.5°C
 ```
 
-
-#### Accelerometer       
-coming soon...
-#### 3D Fusion (Euler)       
-coming soon...
-#### Air Flow 
-coming soon...
-#### Ambient Light           
-coming soon...
-#### Accelerometer, Magnetometer, Gyroscope 
-coming soon...
-#### Accelerometer (Low Energy)  
-coming soon...
-#### ShakeIt Sports Tracker 
-coming soon...
-#### Air Quality (Industrial)
-coming soon...
-#### Air Quality 
-coming soon...
-#### Usage Counter  
-coming soon...
-#### Temperature Probe (PTC) 
-coming soon...
-#### Temperature Probe (NTC) 
-coming soon...
-#### Infrared Array Camera  
-coming soon...
-#### Particulate Matter 
-coming soon...
-#### Distance 
-coming soon...
-#### Ambient Light  
-coming soon...
-#### Highspeed Magnetometer  
-coming soon...
-#### People Presence Detector  
-coming soon...
-#### People Counter
-coming soon...
-#### Distance Counter
-coming soon...
+#### SDK Documentation coming soon:
+* Accelerometer       
+* 3D Fusion (Euler)       
+* Air Flow 
+* Ambient Light           
+* Accelerometer, Magnetometer, Gyroscope 
+* Accelerometer (Low Energy)  
+* ShakeIt Sports Tracker 
+* Air Quality (Industrial)
+* Air Quality 
+* Usage Counter  
+* Temperature Probe (PTC) 
+* Temperature Probe (NTC) 
+* Infrared Array Camera  
+* Particulate Matter 
+* Distance 
+* Ambient Light  
+* Highspeed Magnetometer  
+* People Presence Detector  
+* People Counter
+* Distance Counter
 
 
 # Development Tools
