@@ -313,4 +313,12 @@ You need a sensor type that is not listed yet?
 
 Just drop us an email!
 
+# Troubleshooting
+
+Unfortunately, Android's BLE API is much less convenient than its iOS counterpart. Here is a short summary what you need to consider:
+
+* BLE GATTs need to be **queued**. Android does not support calling multiple GATT commands at a time.
+* You should always disconnect and cleanup every connection
+* A very good blog entry can be found [here](https://android.jlelse.eu/lessons-for-first-time-android-bluetooth-le-developers-i-learned-the-hard-way-fee07646624?gi=bcb339ded9b2) 
+
 
