@@ -308,6 +308,11 @@ Here are some of the tools available:
 * nRF Connect (iOS and Android)
 * Blue Gecko (iOS and Android)
 
+# Compatible Apps
+
+* [bluSensor® AIR for iOS] (https://itunes.apple.com/at/app/blusensor-air/id1018752395?mt=8)
+* [bluSensor® AIR for Android](https://play.google.com/store/apps/details?id=com.almendo.blusensor.air)
+* [bluSensor® GATEWAY for Android] (https://play.google.com/store/apps/details?id=com.almendo.blusensor.gateway)
 
 # Purchase Sensors
 
