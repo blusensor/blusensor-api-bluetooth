@@ -300,7 +300,7 @@ coming soon...
 
 There are many tools available for iOS and Android that you can use for testing and development.
 
-<img src="ble_screenshot.jpg" width="400">
+<img src="screenshot_ble_tool.jpg" width="400">
 
 Here are some of the tools available:
 * BLExplr (iOS)
