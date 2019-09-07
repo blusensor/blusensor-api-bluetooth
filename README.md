@@ -317,8 +317,9 @@ Just drop us an email!
 
 Unfortunately, Android's BLE API is much less convenient than its iOS counterpart. Here is a short summary what you need to consider:
 
-* BLE GATTs need to be **queued**. Android does not support calling multiple GATT commands at a time.
-* You should always disconnect and cleanup every connection
-* A very good blog entry can be found [here](https://android.jlelse.eu/lessons-for-first-time-android-bluetooth-le-developers-i-learned-the-hard-way-fee07646624?gi=bcb339ded9b2) 
+* BLE GATTs commands need to be **queued**. Android does not support calling multiple GATT commands at a time.
+  * [Click here for a sample implementation](https://github.com/NordicPlayground/puck-central-android/blob/master/PuckCentral/app/src/main/java/no/nordicsemi/puckcentral/bluetooth/gatt/GattManager.java)
+* A really good blog for Android and BLE can be found here:
+  * [Lessons for First-Time Android Bluetooth LE developers](https://android.jlelse.eu/lessons-for-first-time-android-bluetooth-le-developers-i-learned-the-hard-way-fee07646624?gi=bcb339ded9b2) 
 
 
