@@ -55,22 +55,14 @@ sensor type  | alarm code    | sensor data
 
 bluSensor® devices (**2nd generation**)
 
-company ID   | company ID    | device type  | sensor type  | alarm code   | sensor data |
+company ID   | company ID    | device type  | device model | alarm code   | sensor data |
 ------------ | ------------- | -------------| -------------| -------------| -------------
 0x06         | 0xE8          | 1 byte       | 1 byte       |  1 byte      | variable bytes
 
+
 #### Device Types
 
-device type  | description            
------------- | ------------- 
-01           | Bluetooth Low Energy (BLE)
-02           | WiFi and BLE (IoT Sensor)
-03           | WiFi and BLE (MQTT Sensor)
-
-
-#### Sensor Types
-
-sensor type  | description             
+device type  | description             
 ------------ | -------------           
 01           | Humidity & Temperature  
 02           | Accelerometer           
@@ -78,25 +70,34 @@ sensor type  | description
 04           | Air Flow                
 05           | Ambient Light           
 06           | Accelerometer, Magnetometer, Gyroscope 
-07           | Accelerometer (Low Energy)  
-08           | ShakeIt Sports Tracker 
-09           | Air Quality (Industrial)
+07           | (reserved)
+08           | (reserved)
+09           | (reserved)
 10           | Air Quality 
 11           | Usage Counter  
-12           | Temperature Probe (PTC) 
-13           | Temperature Probe (NTC) 
+12           | (reserved)
+13           | Temperature
 14           | Infrared Array Camera  
 15           | Particulate Matter 
 16           | Distance 
-17           | Ambient Light  
-18           | Highspeed Magnetometer  
-19           | People Presence Detector  
-20           | People Counter
-21           | Distance Counter
+17           | Distance Count
+18           | People
+
+#### Device Model
+ 
+device model | description            
+------------ | ------------- 
+10           | bluSensor® AIR Datalogger(BLE)
+11           | bluSensor® AIR PRO Datalogger (BLE)
+12           | bluSensor® iBeacon (BLE)
+13           | bluSensor® AIR2 Beacon(BLE)
+14           | bluSensor® AIR2 Datalogger (BLE)
+20           | bluSensor® AIR WIFI (BLE, Wi-Fi)
+21           | bluSensor® AIQ WIFI (BLE, Wi-Fi)
+
 
 #### Advertisement Alarm Codes
 
-bluSensor® devices
 
 alarm code   | description
 ------------ | ------------- 
