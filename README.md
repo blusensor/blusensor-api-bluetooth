@@ -79,8 +79,8 @@ device type  | description
 13           | Temperature
 14           | Infrared Array Camera  
 15           | Particulate Matter 
-16           | Distance 
-17           | Distance Count
+16           | Proximity Distance 
+17           | Proximity Counter
 18           | People
 
 #### Device Model
