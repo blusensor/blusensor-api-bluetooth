@@ -69,8 +69,8 @@ device type  | description
 03           | 3D Fusion (Euler)       
 04           | Air Flow                
 05           | Ambient Light           
-06           | Accelerometer, Magnetometer, Gyroscope 
-07           | (reserved)
+06           | (reserved) 
+07           | Accelerometer, Magnetometer, Gyroscope 
 08           | (reserved)
 09           | (reserved)
 10           | Air Quality 
