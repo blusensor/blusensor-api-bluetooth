@@ -122,7 +122,7 @@ sensor state  | temperature     | humidity      | co2       | tvoc    | aiq inde
 
 Conversion (Android/Java example)
 
-```
+```c++
 //TEMPERATURE (signed, factor 100)
 short temperature_signed = (short) ((sensorData[0] & 0xff) | ((sensorData[1] << 8) & 0xff00)); 
 float tem = temperature_signed / 100.0;
@@ -289,10 +289,26 @@ Example:
 ```
 0100ac667a63 => 42.5% and 23.5°C
 ```
+#### Humidity & Temperature, CO2, TVOC (**2nd generation**)
 
-#### Humidity & Temperature (**2nd generation**)
+```c++
+//TEMPERATURE (signed, factor 100)
+short temperature_signed = (short) ((sensorData[0] & 0xff) | ((sensorData[1] << 8) & 0xff00)); 
+float tem = temperature_signed / 100.0;
 
-TBD
+//HUMIDITY (unsigned, factor 100
+float hum = ((int) (sensorData[2] & 0xff) | ((sensorData[3] << 8) & 0xff00)) / 100.0;
+
+//CO2 (unsigned, factor 1)
+int co2 = (int) (sensorData[4] & 0xff) | ((sensorData[5] << 8) & 0xff00);
+
+//TVOC (unsigned, factor 1)
+int tvoc = (int) (sensorData[6] & 0xff) | ((sensorData[7] << 8) & 0xff00);
+
+//AIQ INDEX (unsigned, factor 1)
+int aiq = (int) sensorData[8];
+
+```
 
 
 
