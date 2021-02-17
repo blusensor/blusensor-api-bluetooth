@@ -46,7 +46,7 @@ To filter for bluSensor® devices during discovery you can use the service UUID 
 
 #### Manufacturer Specific Data (Scan Record)
 
-bluSensor® devices (**1st generation**) 
+bluSensor® devices (**1st generation**) (legacy)
 
 sensor type  | alarm code    | sensor data
 ------------ | ------------- | -------------
@@ -55,61 +55,91 @@ sensor type  | alarm code    | sensor data
 
 bluSensor® devices (**2nd generation**)
 
-company ID   | company ID    | device type  | device model | alarm code   | sensor data |
------------- | ------------- | -------------| -------------| -------------| -------------
-0x06         | 0xE8          | 1 byte       | 1 byte       |  1 byte      | variable bytes
+company ID   | company ID    | protocol version | device type  |  device model  | device hw rev | status bits | status code | sensor data |
+------------ | ------------- | -----------------| -------------| -------------- | --------------| ------------| ------------|-------------|
+0x06         | 0xE8          | 1 byte           | 1 byte       |  1 byte        |   1 byte      |   1 byte    |    1 byte   | 10 bytes     |
 
+
+#### Company ID
+This is our official company identifier assigned by Bluetooth SIG (https://www.bluetooth.com/)
+
+#### Protocol Version
+This is the sensor's protocol version (current version=1)
 
 #### Device Types
 
 device type  | description             
 ------------ | -------------           
 01           | Humidity & Temperature  
-02           | (reserved)           
-03           | 3D Fusion (Euler)       
+02           | Motion (Accelerometer)         
+03           | Motion 3D Fusion (Euler)       
 04           | Air Flow                
-05           | (reserved)           
-06           | (reserved) 
-07           | Accelerometer, Magnetometer, Gyroscope 
-08           | (reserved)
-09           | (reserved)
+05           | Light Ambient
+06           | Motion (Accelerometer, Magnetometer, Gyroscope)
+07           | Motion (Accelerometer)
+08           | Motion Sport
+09           | Air Quality Index
 10           | Air Quality 
-11           | Usage Counter  
-12           | (reserved)
-13           | Temperature
+11           | Motion Counter  
+12           | Temperature
+13           | Temperature (reserved)
 14           | Infrared Array Camera  
 15           | Particulate Matter 
 16           | Proximity Distance 
 17           | Light Ambient
 18           | Magnetometer
 19           | People Detection
-20           | (reserved)
+20           | People Detection (reserved)
 21           | Proximity Counter
+22           | Bearing
 
 #### Device Model
  
 device model | description            
 ------------ | ------------- 
-10           | bluSensor® AIR Datalogger(BLE)
-11           | bluSensor® AIR PRO Datalogger (BLE)
-12           | bluSensor® iBeacon (BLE)
-13           | bluSensor® AIR2 Beacon(BLE)
-14           | bluSensor® AIR2 Datalogger (BLE)
-20           | bluSensor® AIR WIFI (BLE, Wi-Fi)
-21           | bluSensor® AIQ WIFI (BLE, Wi-Fi)
+09           | bluSensor® AIR WIFI (BLE, Wi-Fi)
+10           | bluSensor® AIQ WIFI (BLE, Wi-Fi)
 
 
-#### Advertisement Alarm Codes
+#### Device Hardware Revision
+This is the hardware revision number
+
+#### Device Status Bits
+These are internal status bits
+
+#### Device Status Codes
+These are internal status codes
+
+#### Device Sensor Data
+This contains device specific sensor data (depends on device type)
+
+Device Type: Air Quality 
+
+sensor state  | temperature     | humidity      | co2       | tvoc    | aiq index |
+------------  | -------------   | ------------- | ---------|---------|-------------|
+1 byte        | 2 byte (signed) | 2 byte        | 2 byte   | 2 byte  | 2 byte|
 
 
-alarm code   | description
------------- | ------------- 
-00           | no alarm
-01           | alarm active
+Conversion (Android/Java example)
 
+```
+//TEMPERATURE (signed, factor 100)
+short temperature_signed = (short) ((sensorData[0] & 0xff) | ((sensorData[1] << 8) & 0xff00)); 
+float tem = temperature_signed / 100.0;
 
+//HUMIDITY (unsigned, factor 100
+float hum = ((int) (sensorData[2] & 0xff) | ((sensorData[3] << 8) & 0xff00)) / 100.0;
 
+//CO2 (unsigned, factor 1)
+int co2 = (int) (sensorData[4] & 0xff) | ((sensorData[5] << 8) & 0xff00);
 
+//TVOC (unsigned, factor 1)
+int tvoc = (int) (sensorData[6] & 0xff) | ((sensorData[7] << 8) & 0xff00);
+
+//AIQ INDEX (unsigned, factor 1)
+int aiq = (int) sensorData[8];
+
+```
 
 # Services
 
@@ -240,7 +270,7 @@ a8a82646-10a4-11e3-ab8c-f23c91aec05e
 
 # Converting Sensor Data
 
-#### Humidity & Temperature 
+#### Humidity & Temperature (**1st generation**) (legacy)
 
 The sensor data is 4 bytes and can be converted using the following mechanism and formular.
 
@@ -259,6 +289,12 @@ Example:
 ```
 0100ac667a63 => 42.5% and 23.5°C
 ```
+
+#### Humidity & Temperature (**2nd generation**)
+
+TBD
+
+
 
 #### SDK Documentation coming soon:
 * Accelerometer       
