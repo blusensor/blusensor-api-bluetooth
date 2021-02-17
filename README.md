@@ -117,7 +117,7 @@ Device Type: Air Quality
 
 sensor state  | temperature     | humidity      | co2       | tvoc    | aiq index |
 ------------  | -------------   | ------------- | ---------|---------|-------------|
-1 byte        | 2 byte (signed) | 2 byte        | 2 byte   | 2 byte  | 2 byte|
+1 byte        | 2 byte (signed) | 2 byte        | 2 byte   | 2 byte  | 1 byte|
 
 
 Conversion (Android/Java example)
