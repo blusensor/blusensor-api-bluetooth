@@ -5,7 +5,7 @@
 You can use any Bluetooth Low Energy API to access sensor data, download logged data, configure alarms, and much more on our bluSensor® devices. 
 
 
-<img src="screenshot_studio_2021.png" width="800">
+<img src="screenshot_studio.png" width="800">
 
 For more information how to use Bluetooth Low Energy on your platform we refer to the platform’s API documents.
 
