@@ -93,12 +93,16 @@ device type  | description
 21           | Proximity Counter
 22           | Bearing
 
-#### Device Model
+#### Device Models
  
 device model | description            
 ------------ | ------------- 
-09           | bluSensor® AIR WIFI (BLE, Wi-Fi)
-10           | bluSensor® AIQ WIFI (BLE, Wi-Fi)
+09           | bluSensor® BSP02AIR 
+10           | bluSensor® BSP02AIQ 
+17           | bluSensor® BSP03AIXC 
+18           | bluSensor® BSP03PM
+19           | bluSensor® BSP03TEM
+
 
 
 #### Device Hardware Revision
