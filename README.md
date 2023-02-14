@@ -46,14 +46,14 @@ To filter for bluSensor® devices during discovery you can use the service UUID 
 
 #### Manufacturer Specific Data (Scan Record)
 
-bluSensor® devices (**1st generation**) (legacy)
+bluSensor® AIR (**1st generation**) (legacy)
 
 sensor type  | alarm code    | sensor data
 ------------ | ------------- | -------------
 1 byte       | 1 byte        | variable bytes
 
 
-bluSensor® devices (**2nd generation**)
+bluSensor® BSPx models (**2nd generation**)
 
 company ID   | company ID    | protocol version | device type  |  device model  | device hw rev | status bits | status code | sensor data |
 ------------ | ------------- | -----------------| -------------| -------------- | --------------| ------------| ------------|-------------|
@@ -92,17 +92,29 @@ device type  | description
 20           | People Detection (reserved)
 21           | Proximity Counter
 22           | Bearing
+23           | HVAC
+24           | Air Quality CO2
+25           | Relay
 
-#### Device Models
+
+#### Device Models (legacy)
  
-device model | description            
------------- | ------------- 
-09           | bluSensor® BSP02AIR 
-10           | bluSensor® BSP02AIQ 
-17           | bluSensor® BSP03AIXC 
-18           | bluSensor® BSP03PM
-19           | bluSensor® BSP03TEM
+device model | description  | type |         
+------------ | ----------- | ----------- |  
+01           | bluSensor® AIR | Humidity & Temperature
 
+
+#### Device Models (new)
+
+device model | description | type |            
+------------ | ----------- | ----------- |  
+09           | bluSensor® BSP02AIR | Humidity & Temperature
+10           | bluSensor® BSP02AIQ | Air Quality
+11           | bluSensor® BSP02AIX | Air Quality Index
+16           | bluSensor® BSP03AIX | Air Quality Index
+17           | bluSensor® BSP03AIXC | Air Quality CO2
+18           | bluSensor® BSP03PM | Particilate Matter
+19           | bluSensor® BSP03TEM | Temperature Probe
 
 
 #### Device Hardware Revision
@@ -117,21 +129,68 @@ These are internal status codes
 #### Device Sensor Data
 This contains device specific sensor data (depends on device type)
 
-Device Type: Air Quality 
+#### Device Sensor Data - Humidity and Temperature
 
-sensor state  | temperature     | humidity      | co2       | tvoc    | aiq index |
+
+sensor state  | temperature     | humidity      |
+------------  | -------------   | ------------- | 
+1 byte        | 2 byte (signed) | 2 byte        | 
+
+
+Example Conversion (bluSensor BSPx)
+
+```c++
+
+float humidity = ((int) (sensorData[2] & 0xff) | ((sensorData[3] << 8) & 0xff00)) / 100.0f;
+
+short temperature_signed = (short) ((sensorData[0] & 0xff) | ((sensorData[1] << 8) & 0xff00));
+float temperature = temperature_signed / 100.0f;
+
+```
+
+
+Example Conversion (bluSensor AIR)
+
+```c++
+
+private float convertHumidty(byte[] data) {
+
+    int hum;
+    float rHVal;
+    hum = (data[2] & 0xff) | ((data[3] << 8) & 0xff00);
+    rHVal = -6.0f + 125.0f * (float) hum / (float) 65536;
+    return rHVal;
+}
+
+
+private float converTemperature(byte[] data) {
+
+    int temp;
+    float tempVal;
+    temp = (data[0] & 0xff) | ((data[1] << 8) & 0xff00);
+    tempVal = -46.85f + 175.72f * (float) temp / (float) 65536;
+    return tempVal;
+}
+
+```
+
+
+
+#### Device Sensor Data - Air Quality
+
+sensor state  | temperature     | humidity      | eco2       | tvoc    | aiq index |
 ------------  | -------------   | ------------- | ---------|---------|-------------|
 1 byte        | 2 byte (signed) | 2 byte        | 2 byte   | 2 byte  | 1 byte|
 
 
-Conversion (Android/Java example)
+Example Conversion
 
 ```c++
 //TEMPERATURE (signed, factor 100)
 short temperature_signed = (short) ((sensorData[0] & 0xff) | ((sensorData[1] << 8) & 0xff00)); 
 float tem = temperature_signed / 100.0;
 
-//HUMIDITY (unsigned, factor 100
+//HUMIDITY (unsigned, factor 100)
 float hum = ((int) (sensorData[2] & 0xff) | ((sensorData[3] << 8) & 0xff00)) / 100.0;
 
 //CO2 (unsigned, factor 1)
@@ -144,6 +203,71 @@ int tvoc = (int) (sensorData[6] & 0xff) | ((sensorData[7] << 8) & 0xff00);
 int aiq = (int) sensorData[8];
 
 ```
+
+#### Device Sensor Data - Air Quality Index
+
+sensor state  | temperature     | humidity      | unused   | voc_index|
+------------  | -------------   | ------------- | ---------|---------|
+1 byte        | 2 byte (signed) | 2 byte        | 2 byte   | 2 byte  |
+
+
+
+Example Conversion
+
+```c++
+//TEMPERATURE (signed, factor 100)
+short temperature_signed = (short) ((sensorData[0] & 0xff) | ((sensorData[1] << 8) & 0xff00)); 
+float tem = temperature_signed / 100.0;
+
+//HUMIDITY (unsigned, factor 100)
+float hum = ((int) (sensorData[2] & 0xff) | ((sensorData[3] << 8) & 0xff00)) / 100.0;
+
+//VOC INDEX
+int voc_index = (int) (sensorData[6] & 0xff) | ((sensorData[7] << 8) & 0xff00);
+
+```
+
+
+#### Device Sensor Data - Air Quality CO2
+
+sensor state  | temperature     | humidity      | co2   | voc_index|
+------------  | -------------   | ------------- | ---------|---------|
+1 byte        | 2 byte (signed) | 2 byte        | 2 byte   | 2 byte  |
+
+
+Example Conversion
+
+```c++
+//TEMPERATURE (signed, factor 100)
+short temperature_signed = (short) ((sensorData[0] & 0xff) | ((sensorData[1] << 8) & 0xff00)); 
+float tem = temperature_signed / 100.0;
+
+//HUMIDITY (unsigned, factor 100)
+float hum = ((int) (sensorData[2] & 0xff) | ((sensorData[3] << 8) & 0xff00)) / 100.0;
+
+//CO2
+int co2 = (int) (sensorData[4] & 0xff) | ((sensorData[5] << 8) & 0xff00);
+        
+//VOC INDEX
+int voc_index = (int) (sensorData[6] & 0xff) | ((sensorData[7] << 8) & 0xff00);
+
+```
+
+
+#### Device Sensor Data - Particulate Matter
+
+sensor state  | PM 1.0 | PM2.5  | PM4.0    | PM 10.0 | 
+------------  | -------| ------ | ---------|---------|
+1 byte        | 2 byte | 2 byte | 2 byte   | 2 byte  |
+
+
+```c++
+float pm_1 = ((int)(sensorData[0] & 0xff) | ((sensorData[1] << 8) & 0xff00))/10.0;
+float pm_2 =   measurement.value_1=((int)(sensorData[2] & 0xff) | ((sensorData[3] << 8) & 0xff00))/10.0;
+float pm_4 =  measurement.value_2=((int)(sensorData[4] & 0xff) | ((sensorData[5] << 8) & 0xff00))/10.0;
+float pm_10 =   measurement.value_3=((int)(sensorData[6] & 0xff) | ((sensorData[7] << 8) & 0xff00))/10.0;
+```
+
 
 # Services
 
