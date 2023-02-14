@@ -137,7 +137,7 @@ sensor state  | temperature     | humidity      |
 1 byte        | 2 byte (signed) | 2 byte        | 
 
 
-Example Conversion (bluSensor BSPx)
+Example Conversion bluSensor BSPx (Android/Java)
 
 ```c++
 
@@ -149,7 +149,7 @@ float temperature = temperature_signed / 100.0f;
 ```
 
 
-Example Conversion (bluSensor AIR)
+Example Conversion bluSensor AIR (Android/Java)
 
 ```c++
 
@@ -183,7 +183,7 @@ sensor state  | temperature     | humidity      | eco2       | tvoc    | aiq ind
 1 byte        | 2 byte (signed) | 2 byte        | 2 byte   | 2 byte  | 1 byte|
 
 
-Example Conversion
+Example Conversion (Android/Java):
 
 ```c++
 //TEMPERATURE (signed, factor 100)
@@ -212,7 +212,7 @@ sensor state  | temperature     | humidity      | unused   | voc_index|
 
 
 
-Example Conversion
+Example Conversion (Android/Java):
 
 ```c++
 //TEMPERATURE (signed, factor 100)
@@ -235,7 +235,8 @@ sensor state  | temperature     | humidity      | co2   | voc_index|
 1 byte        | 2 byte (signed) | 2 byte        | 2 byte   | 2 byte  |
 
 
-Example Conversion
+
+Example Conversion (Android/Java):
 
 ```c++
 //TEMPERATURE (signed, factor 100)
@@ -260,6 +261,8 @@ sensor state  | PM 1.0 | PM2.5  | PM4.0    | PM 10.0 |
 ------------  | -------| ------ | ---------|---------|
 1 byte        | 2 byte | 2 byte | 2 byte   | 2 byte  |
 
+
+Example Conversion (Android/Java):
 
 ```c++
 float pm_1 = ((int)(sensorData[0] & 0xff) | ((sensorData[1] << 8) & 0xff00))/10.0;
